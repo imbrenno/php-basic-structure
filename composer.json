@@ -1,0 +1,17 @@
+{
+    "name": "codes/basic-structure",
+    "description": "estrutura basica de php",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Codes\\BasicStructure\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "imbrenno",
+            "email": "brennomaia10@gmail.com"
+        }
+    ],
+    "require": {}
+}
