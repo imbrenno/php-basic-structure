@@ -13,7 +13,7 @@ class Settings
         define('USER', 'sa');
         define('PASSWORD', 'admin123');
         define('DATABASE', 'DbPrimary');
-        define('SERVER', 'localhost\sqlexpress');
+        define('SERVER', 'ATAR-010');
         define('DRIVER_BD', 'sqlsrv');
     }
 }

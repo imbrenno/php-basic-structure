@@ -2,6 +2,8 @@
 
 
 require_once('settings.php');
-require_once('model\database.php');
+require_once('src/model/database.php');
 
-Database::select("select * from users");
+
+$teste = Database::select("select * from users");
+var_dump($teste);
