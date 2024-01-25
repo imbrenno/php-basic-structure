@@ -1,9 +1,17 @@
 <?php
 
+use App\WebService\ViaCep;
 
-require_once('settings.php');
-require_once('src/model/database.php');
+// Supondo que o método consultarCep retorne a resposta do Guzzle
+$consulta = ViaCep::consultarCep('04812223');
 
+// Verifica se a consulta foi bem-sucedida antes de usar var_dump
+if ($consulta->getStatusCode() === 200) {
+    // Converte o corpo da resposta JSON para uma matriz associativa
+    $resultado = json_decode($consulta->getBody(), true);
 
-$teste = Database::select("select * from users");
-var_dump($teste);
+    // Imprime o resultado usando var_dump
+    var_dump($resultado);
+} else {
+    echo "A consulta falhou. Código de status: " . $consulta->getStatusCode();
+}
