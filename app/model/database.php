@@ -1,106 +1,66 @@
-<?PHP
+<?php
 
-ini_set('memory_limit', '1024M');
+namespace App\Model;
 
 class Database
 {
-
     private static $connection;
 
     private static function connect()
     {
-        try {
-            self::$connection = new PDO(DRIVER_BD . ':Server=' . SERVER . ';Database=' . DATABASE, USER, PASSWORD);
-            self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $error) {
-            echo 'Connection Error: ' . $error->getMessage();
-        }
-    }
+        include __DIR__ . '/../../settings/settings.php';
 
-    public static function select(string $query, array $parametros = [], $entidade = null)
-    {
-
-        //EXECUTA QUERY NO BANCO DE DADOS
-        $stmt    = self::execute($query, $parametros);
-        $dadosBd = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        //SE RECEBER OBJETO COMO PARAMETRO, CONVERTE ENTRAPA PARA ARRAY DO OBJETO
-        if ($entidade != null) {
-
-            $arrayObj = [];
-
-            foreach ($dadosBd as $dados) {
-                $objeto = new $entidade();
-                $keys = array_keys($dados);
-
-                foreach ($keys as $key) {
-                    $objeto->{$key} = $dados[$key];
-                }
-                $arrayObj[] = $objeto;
+        if (!isset(self::$connection)) {
+            try {
+                self::$connection = new \PDO(DRIVER_BD . ':Server=' . SERVER . ';Database=' . DATABASE, USER, PASSWORD);
+                self::$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            } catch (\PDOException $error) {
+                throw new \Exception('Connection Error: ' . $error->getMessage());
             }
-            return $arrayObj;
         }
-        return $dadosBd;
     }
 
-    public static function executeInsertMultipleLines(string $query, array $parametros = [])
+    public static function execute($query, $params = [])
     {
-
         try {
             self::connect();
             $stmt = self::$connection->prepare($query);
-            $stmt->execute($parametros);
-        } catch (Exception $e) {
-            echo 'ERRO BANCO: ';
-            echo $e->getMessage();
-            echo ('<br>');
-            echo ('<br> QUERY:');
-            echo $query;
-            echo ('<br>');
-            echo ('<br>');
+            $stmt->execute($params);
+            return $stmt;
+        } catch (\PDOException $error) {
+            throw new \Exception('Database Error: ' . $error->getMessage() . '<br>QUERY: ' . $query . '<br>PARAMS: ' . print_r($params, true));
         }
     }
 
 
-    public static function execute(string $query, array $parametros = [], bool $ultimoId = false, string $mensagemErro = '')
+    public static function getOne($table, $id)
     {
-
-        try {
-            self::connect();
-            $stmt = self::$connection->prepare($query);
-            self::setParametros($stmt, $parametros);
-            $stmt->execute();
-        } catch (Exception $e) {
-            echo 'ERRO BANCO: ';
-            echo $e->getMessage();
-            echo ('<br>');
-            echo ('<br> QUERY:');
-            echo $query;
-            echo ('<br>');
-            echo ('<br>');
-        }
-
-        if ($ultimoId) {
-            $stmt  = self::$connection->prepare('SELECT LAST_INSERT_ID() as id');
-            $stmt->execute();
-            $arrayRetorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            if (isset($arrayRetorno[0]) && isset($arrayRetorno[0]['id'])) {
-                return $arrayRetorno[0]['id'];
-            }
-        }
-        return $stmt;
+        $query = "SELECT * FROM $table WHERE id = :id";
+        $params = [':id' => $id];
+        $result = self::execute($query, $params);
+        return $result->fetchObject();
     }
 
-    private static function setParametros($statement, $parametros = array())
+    public static function getAll($table)
     {
-        foreach ($parametros as $chave => $parametro) {
-            self::setParametro($statement, $chave, $parametro);
-        }
+        $query = "SELECT * FROM $table";
+        $result = self::execute($query);
+        return $result->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    private static function setParametro($statement, $chave, $parametro)
+    public static function save($table, $data)
     {
-        $statement->bindparam($chave, $parametro);
+        $columns = implode(', ', array_keys($data));
+        $values = implode(', :', array_keys($data));
+
+        $query = "INSERT INTO $table ($columns) VALUES (:$values)";
+        self::execute($query, $data);
+    }
+
+    public static function delete($table, $id)
+    {
+        $query = "DELETE FROM $table WHERE id = :id";
+        $params = [':id' => $id];
+        self::execute($query, $params);
     }
 }
