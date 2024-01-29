@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use App\Controller\UserController;
+use Src\Controller\UserCtrl;
 
-$userController = new UserController();
+$userController = new UserCtrl();
 $userController->index();

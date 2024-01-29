@@ -1,10 +1,10 @@
 {
-    "name": "codes/basic-structure",
-    "description": "estrutura basica de php",
-    "type": "project",
+    "name": "vendor/basic",
+    "description": "estrutura basica mvc",
+    "type": "library",
     "autoload": {
         "psr-4": {
-            "Codes\\BasicStructure\\": "app/"
+            "Vendor\\Basic\\": "src/"
         }
     },
     "authors": [

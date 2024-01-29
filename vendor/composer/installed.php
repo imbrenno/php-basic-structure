@@ -1,24 +1,15 @@
 <?php return array(
     'root' => array(
-        'name' => 'codes/basic-structure',
+        'name' => 'vendor/basic',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'db0aa6570e9a10883796dbee177fec2f40a82044',
-        'type' => 'project',
+        'reference' => 'd8d8f5a85082e660f793e787e421c555d5c5a9d6',
+        'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'codes/basic-structure' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'db0aa6570e9a10883796dbee177fec2f40a82044',
-            'type' => 'project',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'guzzlehttp/guzzle' => array(
             'pretty_version' => '7.8.1',
             'version' => '7.8.1.0',
@@ -106,6 +97,15 @@
             'reference' => '7c3aff79d10325257a001fcf92d991f24fc967cf',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'vendor/basic' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'd8d8f5a85082e660f793e787e421c555d5c5a9d6',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

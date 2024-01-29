@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Controller;
+namespace Src\Controller;
 
-use App\Model\User;  // Certifique-se de usar o namespace correto para a classe User
+use Src\Database\Models\UserModel;  // Certifique-se de usar o namespace correto para a classe User
 
-class UserController
+class UserCtrl
 {
     public function index()
     {
         // Cria a tabela se não existir
         try {
-            User::createTableIfNotExists();
+            UserModel::createTableIfNotExists();
 
-            $newUser = new User();
+            $newUser = new UserModel();
             $newUser->name = 'adm';
             $newUser->email = 'adm@example.com';
             $newUser->document = '12345612312';
