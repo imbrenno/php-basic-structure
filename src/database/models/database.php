@@ -1,6 +1,7 @@
 <?php
 
-namespace Src\Model;
+
+namespace Src\Database\Models;
 
 class Database
 {
@@ -17,14 +18,21 @@ class Database
             } catch (\PDOException $error) {
                 throw new \Exception('Connection Error: ' . $error->getMessage());
             }
+
+            return;
         }
+    }
+
+    private static function getConnection()
+    {
+        self::connect();
+        return self::$connection;
     }
 
     public static function execute($query, $params = [])
     {
         try {
-            self::connect();
-            $stmt = self::$connection->prepare($query);
+            $stmt = self::getConnection()->prepare($query);
             $stmt->execute($params);
             return $stmt;
         } catch (\PDOException $error) {

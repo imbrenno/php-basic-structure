@@ -1,11 +1,19 @@
 <?php
 
 namespace Src\Database\Models;
+
 use Src\Database\Models\Database;
 
 class UserModel
 {
     private static $tableName = 'users';
+
+    // Propriedades para os campos do usuário
+    public $name;
+    public $email;
+    public $document;
+    public $username;
+    public $password;
 
     public static function createTableIfNotExists()
     {

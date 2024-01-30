@@ -2,7 +2,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Src\Controller\UserCtrl;
+use Src\Controllers\UserCtrl;
 
 $userController = new UserCtrl();
-$userController->index();
+$result = $userController->createDefaultUser();
+echo $result;
+
