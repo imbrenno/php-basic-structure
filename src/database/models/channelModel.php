@@ -4,7 +4,7 @@ namespace Src\Database\Models;
 
 use Src\Database\Models\Database;
 
-class ChannelsModel
+class ChannelModel
 {
 
 
@@ -15,7 +15,7 @@ class ChannelsModel
 
 
     private static $tableName = 'channels';
-    public static function createTableChannelsIfNotExists()
+    public static function createTableChannelIfNotExists()
     {
         $query = "
             IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='" . self::$tableName . "' AND xtype='U')
@@ -37,7 +37,7 @@ class ChannelsModel
     }
 
 
-    public function OrderSave()
+    public function channelSave()
     {
         $data = [
             'magalu_channel_id' => $this->magalu_channel_id,

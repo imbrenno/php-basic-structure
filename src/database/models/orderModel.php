@@ -4,7 +4,7 @@ namespace Src\Database\Models;
 
 use Src\Database\Models\Database;
 
-class OrdersModel
+class OrderModel
 {
 
 
@@ -21,7 +21,7 @@ class OrdersModel
     public $total_deliveries;
 
     private static $tableName = 'orders';
-    public static function createTableOrdersIfNotExists()
+    public static function createTableOrderIfNotExists()
     {
         $query = "
             IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='" . self::$tableName . "' AND xtype='U')
@@ -49,7 +49,7 @@ class OrdersModel
     }
 
 
-    public function OrderSave()
+    public function orderSave()
     {
         $data = [
             'magalu_order_id' => $this->magalu_order_id,

@@ -3,18 +3,31 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use Src\Controllers\UserCtrl;
-use Src\Database\Models\OrdersModel;
-use Src\Database\Models\ChannelsModel;
+use Src\Database\Models\OrderModel;
+use Src\Database\Models\ChannelModel;
+use Src\Database\Models\AgreementModel;
+use Src\Database\Models\BuyerModel;
+use Src\Database\Models\SellerModel;
+use Src\Database\Models\RecipientModel;
 
 $userController = new UserCtrl();
 $userResult = $userController->createDefaultUser();
-echo $userResult;
 
-$ordersModel = new OrdersModel();
-$createTableOrder =  $ordersModel->createTableOrdersIfNotExists();
+$orderModel = new OrderModel();
+$createTableOrder =  $orderModel->createTableOrderIfNotExists();
 
-$channelsModel = new ChannelsModel();
-$createTableOrder =  $channelsModel->createTableChannelsIfNotExists();
+$channelModel = new ChannelModel();
+$createTableChannel =  $channelModel->createTableChannelIfNotExists();
 
+$agreementModel = new AgreementModel();
+$createTableAgreement =  $agreementModel->createTableAgreementIfNotExists();
 
+$sellerModel = new SellerModel();
+$createTableSeller =  $sellerModel->createTableSellerIfNotExists();
+
+$buyerModel = new BuyerModel();
+$createTableBuyer =  $buyerModel->createTableBuyerIfNotExists();
+
+$recipientModel = new RecipientModel();
+$createTableRecipient =  $recipientModel->createTableRecipientIfNotExists();
 
