@@ -37,7 +37,7 @@ class UserModel
     }
 
 
-    public function save()
+    public function userSave()
     {
         $data = [
             'name' => $this->name,

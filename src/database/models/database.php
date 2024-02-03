@@ -41,10 +41,8 @@ class Database
     }
 
 
-    public static function getOne($table, $id)
+    public static function getOne($query, $params)
     {
-        $query = "SELECT * FROM $table WHERE id = :id";
-        $params = [':id' => $id];
         $result = self::execute($query, $params);
         return $result->fetchObject();
     }

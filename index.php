@@ -3,8 +3,18 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use Src\Controllers\UserCtrl;
+use Src\Database\Models\OrdersModel;
+use Src\Database\Models\ChannelsModel;
 
 $userController = new UserCtrl();
-$result = $userController->createDefaultUser();
-echo $result;
+$userResult = $userController->createDefaultUser();
+echo $userResult;
+
+$ordersModel = new OrdersModel();
+$createTableOrder =  $ordersModel->createTableOrdersIfNotExists();
+
+$channelsModel = new ChannelsModel();
+$createTableOrder =  $channelsModel->createTableChannelsIfNotExists();
+
+
 

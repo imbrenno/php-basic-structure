@@ -10,7 +10,9 @@ class UserCtrl
     public function createDefaultUser()
     {
         try {
-            $user = Database::getOne('users', '1');
+            $query = "SELECT * FROM users WHERE username = :username";
+            $params = [':username' => 'admin'];
+            $user = Database::getOne($query, $params);
         } catch (\Exception $e) {
             $user = null;
         }
@@ -26,7 +28,7 @@ class UserCtrl
                 $newUser->username = 'admin';
                 $newUser->password = 'admin';
 
-                $newUser->save();
+                $newUser->userSave();
 
                 return 'Create';
             } catch (\Exception $e) {
@@ -44,7 +46,7 @@ class UserCtrl
 
         if ($user == null) {
             try {
-                
+
                 $newUser = new UserModel();
                 $newUser->name = 'adm';
                 $newUser->email = 'adm@example.com';
@@ -52,7 +54,7 @@ class UserCtrl
                 $newUser->username = 'admin';
                 $newUser->password = 'admin';
 
-                $newUser->save();
+                $newUser->userSave();
 
                 return 'Create';
             } catch (\Exception $e) {
