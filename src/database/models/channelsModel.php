@@ -4,7 +4,7 @@ namespace Src\Database\Models;
 
 use Src\Database\Models\Database;
 
-class ChannelModel
+class ChannelsModel
 {
 
 
@@ -25,7 +25,7 @@ class ChannelModel
                 order_id INT NOT NULL,         
                 channel_extras VARCHAR(400) NOT NULL,
                 
-                FOREIGN KEY (order_id) REFERENCES orders(id)
+                FOREIGN KEY (order_id) REFERENCES orders(id),
             )
         ";
 

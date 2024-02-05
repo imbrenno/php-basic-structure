@@ -2,7 +2,7 @@
 
 namespace Src\Controllers;
 
-use Src\Database\Models\UserModel;
+use Src\Database\Models\UsersModel;
 use Src\Database\Models\Database;
 
 class UserCtrl
@@ -19,9 +19,9 @@ class UserCtrl
 
         if ($user == null) {
             try {
-                UserModel::createTableIfNotExists();
+                UsersModel::createTableIfNotExists();
 
-                $newUser = new UserModel();
+                $newUser = new UsersModel();
                 $newUser->name = 'adm';
                 $newUser->email = 'adm@example.com';
                 $newUser->document = '12345612312';
@@ -47,7 +47,7 @@ class UserCtrl
         if ($user == null) {
             try {
 
-                $newUser = new UserModel();
+                $newUser = new UsersModel();
                 $newUser->name = 'adm';
                 $newUser->email = 'adm@example.com';
                 $newUser->document = '12345612312';
