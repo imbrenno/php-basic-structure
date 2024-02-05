@@ -2,7 +2,7 @@
 
 namespace Src\Controllers;
 
-use Src\Database\Models\UserModel;
+use Src\Database\Models\UsersModel;
 use Src\Database\Models\Database;
 
 class UserCtrl
@@ -10,23 +10,25 @@ class UserCtrl
     public function createDefaultUser()
     {
         try {
-            $user = Database::getOne('users', '1');
+            $query = "SELECT * FROM users WHERE username = :username";
+            $params = [':username' => 'admin'];
+            $user = Database::getOne($query, $params);
         } catch (\Exception $e) {
             $user = null;
         }
 
         if ($user == null) {
             try {
-                UserModel::createTableIfNotExists();
+                UsersModel::createTableIfNotExists();
 
-                $newUser = new UserModel();
+                $newUser = new UsersModel();
                 $newUser->name = 'adm';
                 $newUser->email = 'adm@example.com';
                 $newUser->document = '12345612312';
                 $newUser->username = 'admin';
                 $newUser->password = 'admin';
 
-                $newUser->save();
+                $newUser->userSave();
 
                 return 'Create';
             } catch (\Exception $e) {
@@ -44,15 +46,15 @@ class UserCtrl
 
         if ($user == null) {
             try {
-                
-                $newUser = new UserModel();
+
+                $newUser = new UsersModel();
                 $newUser->name = 'adm';
                 $newUser->email = 'adm@example.com';
                 $newUser->document = '12345612312';
                 $newUser->username = 'admin';
                 $newUser->password = 'admin';
 
-                $newUser->save();
+                $newUser->userSave();
 
                 return 'Create';
             } catch (\Exception $e) {

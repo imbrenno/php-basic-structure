@@ -4,7 +4,7 @@ namespace Src\Database\Models;
 
 use Src\Database\Models\Database;
 
-class UserModel
+class UsersModel
 {
     private static $tableName = 'users';
 
@@ -37,7 +37,7 @@ class UserModel
     }
 
 
-    public function save()
+    public function userSave()
     {
         $data = [
             'name' => $this->name,

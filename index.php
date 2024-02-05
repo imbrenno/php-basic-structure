@@ -2,9 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Src\Controllers\UserCtrl;
+use Src\Database\Repository\CreateTables;
 
-$userController = new UserCtrl();
-$result = $userController->createDefaultUser();
-echo $result;
-
+$createTables = new CreateTables();
+$result = $createTables->CreateTablesDb();
