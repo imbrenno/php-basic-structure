@@ -36,30 +36,4 @@ class UserCtrl
             }
         }
     }
-    public function newUser()
-    {
-        try {
-            $user = Database::getOne('users', '1');
-        } catch (\Exception $e) {
-            $user = null;
-        }
-
-        if ($user == null) {
-            try {
-
-                $newUser = new UsersModel();
-                $newUser->name = 'adm';
-                $newUser->email = 'adm@example.com';
-                $newUser->document = '12345612312';
-                $newUser->username = 'admin';
-                $newUser->password = 'admin';
-
-                $newUser->userSave();
-
-                return 'Create';
-            } catch (\Exception $e) {
-                echo 'Error: ' . $e->getMessage();
-            }
-        }
-    }
 }
